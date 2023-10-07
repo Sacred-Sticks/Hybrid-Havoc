@@ -40,6 +40,8 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
     {
         yield return new WaitForSeconds(respawnTimer);
         OnRespawn.Trigger(new RespawnArgs(args.PlayerObject, args.PlayerID));
+        var healthComponent = args.PlayerObject.GetComponent<Health>();
+        healthComponent.health = healthComponent.MaxHealth;
     }
 
     public class RespawnArgs : EventArgs

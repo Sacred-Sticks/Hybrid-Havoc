@@ -26,7 +26,12 @@ namespace Kickstarter.Inputs
         protected InputAction inputAction;
 
         private bool actionsRegistered;
-        
+
+        private void OnEnable()
+        {
+            actionsRegistered = false;
+        }
+
         public override void Initialize(Gamepad[] gamepads)
         {
             devices = new InputDevice[gamepads.Length + 1];

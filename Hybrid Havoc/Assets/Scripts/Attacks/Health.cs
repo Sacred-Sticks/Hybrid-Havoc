@@ -1,29 +1,37 @@
- using System;
- using Kickstarter.Events;
- using Kickstarter.Identification;
- using UnityEngine;
- using IServiceProvider = Kickstarter.Events.IServiceProvider;
+using System;
+using Kickstarter.Events;
+using Kickstarter.Identification;
+using UnityEngine;
+using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
- [RequireComponent(typeof(Player))]
-public class Health : MonoBehaviour , IServiceProvider
+[RequireComponent(typeof(Player))]
+public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private Service OnDeath;
-    [SerializeField] private Service OnRespawn;
 
     private Player player;
     private float currentHealth;
-    
-    private float health
+
+    public int MaxHealth
     {
         get
+        {
+            return maxHealth;
+        }
+    }
+    
+    public float health
+    {
+        private get
         {
             return currentHealth;
         }
         set
         {
             currentHealth = value;
-            if (health <= 0)
+            Debug.Log($"New Health: {health}");
+            if (currentHealth <= 0)
             {
                 OnDeath.Trigger(new DeathArgs(gameObject, player.PlayerID));
             }
@@ -37,30 +45,12 @@ public class Health : MonoBehaviour , IServiceProvider
 
     private void Start()
     {
-        health = maxHealth;
-    }
-
-    private void OnEnable()
-    {
-        OnRespawn.Event += ImplementService;
-    }
-
-    private void OnDisable()
-    {
-        OnRespawn.Event -= ImplementService;
-    }
-
-    public void ImplementService(EventArgs args)
-    {
-        if (args is PlayerStatus.RespawnArgs)
-            health = maxHealth;
+        health = MaxHealth;
     }
 
     public void DealDamage(float damage)
     {
-        Debug.Log(health);
         health -= damage;
-        Debug.Log(health);
     }
 
     public class DeathArgs : EventArgs
