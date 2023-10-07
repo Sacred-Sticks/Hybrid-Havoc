@@ -56,6 +56,8 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>, IServiceProvider
 
     public void ReceiveInput(float input)
     {
+        if (!gameObject.activeInHierarchy)
+            return;
         if (input > deadzone)
         {
             attack ??= StartCoroutine(AttackTimer());

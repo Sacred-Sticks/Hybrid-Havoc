@@ -54,6 +54,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   initialState: 0
+  OnPlayerDestroyed: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
 --- !u!114 &8126711791241261460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,9 +70,6 @@ MonoBehaviour:
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
   OnRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
   respawnTimer: 5
-  players:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &5255775134727524004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,4 +86,5 @@ MonoBehaviour:
   hybrid: {fileID: 0}
   OnRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+  OnPlayerDestroyed: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
   OnHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
