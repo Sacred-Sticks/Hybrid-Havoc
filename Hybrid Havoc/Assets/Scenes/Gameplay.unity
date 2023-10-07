@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 263643685}
   - component: {fileID: 263643684}
+  - component: {fileID: 263643686}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -168,6 +169,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &263643686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263643683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c21ffc9709449d4c9cddb5603c1a808, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+  OnRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
+  respawnTimer: 5
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,26 +343,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3de48b406263375478af3971a5db42a1, type: 3}
---- !u!1 &828236980 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3656473626560052864, guid: 3de48b406263375478af3971a5db42a1, type: 3}
-  m_PrefabInstance: {fileID: 6620888790825705922}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &828236992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828236980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c21ffc9709449d4c9cddb5603c1a808, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
-  OnRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
-  respawnTimer: 5
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,21 +593,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8125797755602221390, guid: 3de48b406263375478af3971a5db42a1, type: 3}
-      propertyPath: deadzone
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8125797755602221390, guid: 3de48b406263375478af3971a5db42a1, type: 3}
-      propertyPath: fireRate
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3656473626560052864, guid: 3de48b406263375478af3971a5db42a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 828236992}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3de48b406263375478af3971a5db42a1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

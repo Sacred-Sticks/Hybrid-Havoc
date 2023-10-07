@@ -58,7 +58,9 @@ public class Health : MonoBehaviour , IServiceProvider
 
     public void DealDamage(float damage)
     {
+        Debug.Log(health);
         health -= damage;
+        Debug.Log(health);
     }
 
     public class DeathArgs : EventArgs

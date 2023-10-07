@@ -25,7 +25,7 @@ namespace Kickstarter.Inputs
         private InputDevice[] devices;
         protected InputAction inputAction;
 
-        private bool registered;
+        private bool actionsRegistered;
         
         public override void Initialize(Gamepad[] gamepads)
         {
@@ -35,7 +35,6 @@ namespace Kickstarter.Inputs
             AddRegistration();
             StoreDevices(gamepads);
             CreateActionMappings(devices);
-            registered = true;
         }
 
         private void AddRegistration()
@@ -69,6 +68,7 @@ namespace Kickstarter.Inputs
             {
                 actionMap.Add(inputDevice, null);
             }
+            actionsRegistered = true;
         }
 
         private void AdjustActionMappings(InputDevice[] inputDevices, InputDevice device)
@@ -88,7 +88,7 @@ namespace Kickstarter.Inputs
 
         public void SubscribeToInputAction(Action<TType> action, Player.PlayerIdentifier playerRegister)
         {
-            if (!registered)
+            if (!actionsRegistered)
                 return;
             int playerIndex = playerRegister switch
             {
@@ -104,7 +104,7 @@ namespace Kickstarter.Inputs
         
         public void UnsubscribeToInputAction(Action<TType> action, Player.PlayerIdentifier playerRegister)
         {
-            if (!registered)
+            if (!actionsRegistered)
                 return;
             int playerIndex = playerRegister switch
             {
