@@ -25,6 +25,8 @@ namespace Kickstarter.Inputs
         private InputDevice[] devices;
         protected InputAction inputAction;
 
+        private bool registered;
+        
         public override void Initialize(Gamepad[] gamepads)
         {
             devices = new InputDevice[gamepads.Length + 1];
@@ -33,6 +35,7 @@ namespace Kickstarter.Inputs
             AddRegistration();
             StoreDevices(gamepads);
             CreateActionMappings(devices);
+            registered = true;
         }
 
         private void AddRegistration()
@@ -85,6 +88,8 @@ namespace Kickstarter.Inputs
 
         public void SubscribeToInputAction(Action<TType> action, Player.PlayerIdentifier playerRegister)
         {
+            if (!registered)
+                return;
             int playerIndex = playerRegister switch
             {
                 Player.PlayerIdentifier.KeyboardAndMouse => 0,
@@ -95,6 +100,22 @@ namespace Kickstarter.Inputs
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRegister), playerRegister, null),
             };
             actionMap[devices[playerIndex]] += action;
+        }
+        
+        public void UnsubscribeToInputAction(Action<TType> action, Player.PlayerIdentifier playerRegister)
+        {
+            if (!registered)
+                return;
+            int playerIndex = playerRegister switch
+            {
+                Player.PlayerIdentifier.KeyboardAndMouse => 0,
+                Player.PlayerIdentifier.ControllerOne => 1,
+                Player.PlayerIdentifier.ControllerTwo => 2,
+                Player.PlayerIdentifier.ControllerThree => 3,
+                Player.PlayerIdentifier.ControllerFour => 4,
+                _ => throw new ArgumentOutOfRangeException(nameof(playerRegister), playerRegister, null),
+            };
+            actionMap[devices[playerIndex]] -= action;
         }
 
         public override void AddDevice(InputDevice device)

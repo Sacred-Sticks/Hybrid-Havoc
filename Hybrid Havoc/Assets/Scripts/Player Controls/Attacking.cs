@@ -33,12 +33,12 @@ public class Attacking : MonoBehaviour
 
     private void OnEnable()
     {
-        shootingInput.EnableInput();
+        shootingInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
     private void OnDisable()
     {
-        shootingInput.DisableInput();
+        shootingInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
     private void ReceiveInput(float input)

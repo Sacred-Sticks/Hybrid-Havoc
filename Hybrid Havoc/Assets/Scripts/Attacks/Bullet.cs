@@ -6,16 +6,23 @@ using UnityEngine.Search;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float lifeTime;
+    [SerializeField] private float waitTime;
     [SerializeField] private float damage;
 
+    private bool canCollide;
+    
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(lifeTime);
+        yield return new WaitForSeconds(waitTime);
+        canCollide = true;
+        yield return new WaitForSeconds(lifeTime - waitTime);
         Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!canCollide)
+            return;
         collision.gameObject.TryGetComponent(out Health health);
         if (!health)
             return;

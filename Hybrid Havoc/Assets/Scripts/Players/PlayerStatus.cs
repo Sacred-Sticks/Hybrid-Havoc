@@ -14,18 +14,26 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
     private void OnEnable()
     {
         OnDeath.Event += ImplementService;
+        OnRespawn.Event += ImplementService;
     }
 
     private void OnDisable()
     {
         OnDeath.Event -= ImplementService;
+        OnRespawn.Event -= ImplementService;
     }
 
     public void ImplementService(EventArgs args)
     {
-        if (args is not Health.DeathArgs deathArgs)
-            return;
-        StartCoroutine(Respawn(deathArgs));
+        switch (args)
+        {
+            case Health.DeathArgs deathArgs:
+                Death(deathArgs);
+                break;
+            case RespawnArgs respawnArgs:
+                Respawn(respawnArgs);
+                break;
+        }
     }
 
     private IEnumerator Respawn(Health.DeathArgs args)
@@ -36,13 +44,24 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
 
     public class RespawnArgs : EventArgs
     {
-        public RespawnArgs(GameObject playerGameObject, Player.PlayerIdentifier playerID)
+        public RespawnArgs(GameObject playerObject, Player.PlayerIdentifier playerID)
         {
-            PlayerGameObject = playerGameObject;
+            PlayerObject = playerObject;
             PlayerID = playerID;
         }
 
-        public GameObject PlayerGameObject { get; private set; }
+        public GameObject PlayerObject { get; private set; }
         public Player.PlayerIdentifier PlayerID { get; private set; }
+    }
+
+    private void Death(Health.DeathArgs args)
+    {
+        args.PlayerObject.SetActive(false);
+        StartCoroutine(Respawn(args));
+    }
+
+    private void Respawn(RespawnArgs args)
+    {
+        args.PlayerObject.SetActive(true);
     }
 }

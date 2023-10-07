@@ -32,12 +32,12 @@ public class Movement : MonoBehaviour
 
     private void OnEnable()
     {
-        movementInput.EnableInput();
+        movementInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
     private void OnDisable()
     {
-        movementInput.DisableInput();
+        movementInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
     private void ReceiveInput(Vector2 input)

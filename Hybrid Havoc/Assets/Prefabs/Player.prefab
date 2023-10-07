@@ -195,6 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingInput: {fileID: 11400000, guid: 58e250476078fc248931faca417f5744, type: 2}
+  deadzone: 0.5
+  fireRate: 1
 --- !u!114 &5800850579833816080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +225,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+  OnRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}

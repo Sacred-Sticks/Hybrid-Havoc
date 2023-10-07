@@ -24,12 +24,12 @@ public class Rotation : MonoBehaviour
 
     private void OnEnable()
     {
-        rotationInput.EnableInput();
+        rotationInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
     private void OnDisable()
     {
-        rotationInput.DisableInput();
+        rotationInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
     private void ReceiveInput(Vector2 input)
