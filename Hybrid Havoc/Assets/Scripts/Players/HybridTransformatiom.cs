@@ -13,27 +13,30 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     [SerializeField] private float timeToTransform;
     [SerializeField] private Player hybrid;
     [Space]
-    [SerializeField] private Service OnRespawn;
-    [SerializeField] private Service OnDeath;
-    [SerializeField] private Service OnPlayerDestroyed;
+    [SerializeField] private Service onRespawn;
+    [SerializeField] private Service onDeath;
+    [SerializeField] private Service onPlayerDestroyed;
+    [SerializeField] private Service onHybridDeath;
     [Space]
-    [SerializeField] private Service OnHybridTransformation;
+    [SerializeField] private Service onHybridTransformation;
 
     private readonly Dictionary<Player.PlayerIdentifier, Coroutine> transformationRoutines = new Dictionary<Player.PlayerIdentifier, Coroutine>();
     private PlayerStatus statusTracker;
-    
+
     private void OnEnable()
     {
-        OnDeath.Event += ImplementService;
-        OnRespawn.Event += ImplementService;
-        OnPlayerDestroyed.Event += ImplementService;
+        onDeath.Event += ImplementService;
+        onRespawn.Event += ImplementService;
+        onPlayerDestroyed.Event += ImplementService;
+        onHybridDeath.Event += ImplementService;
     }
 
     private void OnDisable()
     {
-        OnDeath.Event -= ImplementService;
-        OnRespawn.Event -= ImplementService;
-        OnPlayerDestroyed.Event -= ImplementService;
+        onDeath.Event -= ImplementService;
+        onRespawn.Event -= ImplementService;
+        onPlayerDestroyed.Event -= ImplementService;
+        onHybridDeath.Event -= ImplementService;
     }
 
     private void Awake()
@@ -42,6 +45,11 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     }
 
     private void Start()
+    {
+        StartAllTransformations();
+    }
+
+    private void StartAllTransformations()
     {
         var players = GameManager.instance.Players;
         foreach (var player in players.Where(p => p != null))
@@ -62,6 +70,9 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
                 break;
             case GameManager.PlayerDestroyedArgs playerDestroyedArgs:
                 CancelTransformation(playerDestroyedArgs);
+                break;
+            case Hybrid.HybridDeathArgs:
+                StartAllTransformations();
                 break;
         }
     }
@@ -101,31 +112,8 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
             yield break;
         hybrid.gameObject.SetActive(true);
         playerObject.SetActive(false);
-        OnHybridTransformation.Trigger(new Hybrid.HybridCreationArgs(playerObject, hybrid.PlayerID, playerID));
+        onHybridTransformation.Trigger(new Hybrid.HybridCreationArgs(playerObject, hybrid.PlayerID, playerID));
         GameManager.instance.SetGameState(GameManager.StateMachine.GameState.HybridActive);
         hybrid.PlayerID = playerID;
-    }
-
-    [Serializable]
-    private struct HybridType
-    {
-        [SerializeField] private Player.PlayerIdentifier playerID;
-        [SerializeField] private GameObject prefab;
-        
-        public Player.PlayerIdentifier PlayerID
-        {
-            get
-            {
-                return playerID;
-            }
-        }
-
-        public GameObject Prefab
-        {
-            get
-            {
-                return prefab;
-            }
-        }
     }
 }

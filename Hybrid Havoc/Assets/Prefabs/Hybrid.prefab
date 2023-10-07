@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3590074065984141438}
   - component: {fileID: 4224148211431994593}
   - component: {fileID: 5835692254391257350}
+  - component: {fileID: 249611440823225219}
   m_Layer: 0
   m_Name: Hybrid
   m_TagString: Untagged
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingInput: {fileID: 11400000, guid: 58e250476078fc248931faca417f5744, type: 2}
   deadzone: 0.5
-  fireRate: 1
+  fireRate: 5
   onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &4224148211431994593
 MonoBehaviour:
@@ -228,3 +229,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+--- !u!114 &249611440823225219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056719769742430923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190782d797f388942885475b531de614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHybridCreation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
+  OnHybridDeath: {fileID: 11400000, guid: 6121c2242b017264097a7e609079bc09, type: 2}

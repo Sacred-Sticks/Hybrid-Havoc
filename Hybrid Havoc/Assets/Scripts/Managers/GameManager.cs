@@ -5,6 +5,7 @@ using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
+using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 public class GameManager : MonoBehaviour
 {
