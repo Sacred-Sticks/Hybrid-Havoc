@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     [Space]
     [SerializeField] private Service OnRespawn;
     [SerializeField] private Service OnDeath;
+    [SerializeField] private Service OnPlayerDestroyed;
     [Space]
     [SerializeField] private Service OnHybridTransformation;
 
@@ -24,12 +26,14 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     {
         OnDeath.Event += ImplementService;
         OnRespawn.Event += ImplementService;
+        OnPlayerDestroyed.Event += ImplementService;
     }
 
     private void OnDisable()
     {
         OnDeath.Event -= ImplementService;
         OnRespawn.Event -= ImplementService;
+        OnPlayerDestroyed.Event -= ImplementService;
     }
 
     private void Awake()
@@ -39,9 +43,11 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
 
     private void Start()
     {
-        var players = statusTracker.Players;
-        foreach (var player in players)
+        var players = GameManager.instance.Players;
+        foreach (var player in players.Where(p => p != null))
+        {
             StartTransformation(new PlayerStatus.RespawnArgs(player.gameObject, player.PlayerID));
+        }
     }
 
     public void ImplementService(EventArgs args)
@@ -54,7 +60,15 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
             case PlayerStatus.RespawnArgs respawnArgs:
                 StartTransformation(respawnArgs);
                 break;
+            case GameManager.PlayerDestroyedArgs playerDestroyedArgs:
+                CancelTransformation(playerDestroyedArgs);
+                break;
         }
+    }
+
+    private void CancelTransformation(GameManager.PlayerDestroyedArgs args)
+    {
+        StopTransformation(new Health.DeathArgs(args.PlayerObject, args.PlayerID));
     }
 
     private void StopTransformation(Health.DeathArgs args)
@@ -79,9 +93,16 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     private IEnumerator TransformationTimer(GameObject playerObject, Player.PlayerIdentifier playerID)
     {
         yield return new WaitForSeconds(timeToTransform);
+        if (GameManager.instance.GameState.ActiveState == GameManager.StateMachine.GameState.HybridActive)
+            yield break;
+        if (playerObject == null)
+            yield break;
         hybrid.gameObject.SetActive(true);
         playerObject.SetActive(false);
+        if (GameManager.instance.GameState.ActiveState == GameManager.StateMachine.GameState.HybridActive)
+            yield break;
         OnHybridTransformation.Trigger(new Hybrid.HybridCreationArgs(playerObject, hybrid.PlayerID, playerID));
+        GameManager.instance.SetGameState(GameManager.StateMachine.GameState.HybridActive);
         hybrid.PlayerID = playerID;
     }
 

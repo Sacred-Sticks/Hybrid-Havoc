@@ -12,16 +12,7 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
     [SerializeField] private Service OnDeath;
     [SerializeField] private Service OnRespawn;
     [SerializeField] private float respawnTimer;
-    [SerializeField] private Player[] players;
 
-    public IEnumerable<Player> Players
-    {
-        get
-        {
-            return players;
-        }
-    }
-    
     private void OnEnable()
     {
         OnDeath.Event += ImplementService;
@@ -75,7 +66,7 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
 
     private void Respawn(RespawnArgs args)
     {
-        var player = players.FirstOrDefault(p => p.PlayerID == args.PlayerID);
+        var player = GameManager.instance.Players.FirstOrDefault(p => p.PlayerID == args.PlayerID);
         player.gameObject.SetActive(true);
     }
 }

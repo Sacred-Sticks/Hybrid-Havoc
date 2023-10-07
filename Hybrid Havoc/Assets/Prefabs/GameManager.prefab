@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5329676bbcb7846a0b8bc4d71c6013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToTransform: 30
+  timeToTransform: 10
   hybrid: {fileID: 0}
   OnRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}

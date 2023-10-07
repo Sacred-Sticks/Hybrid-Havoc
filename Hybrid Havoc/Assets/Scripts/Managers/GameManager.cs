@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
@@ -12,10 +14,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Player> players;
     [Space]
     [SerializeField] private StateMachine.GameState initialState;
+    [Space]
+    [SerializeField] private Service OnPlayerDestroyed;
 
     public static GameManager instance;
 
     public StateMachine GameState { get; private set; }
+    public List<Player> Players
+    {
+        get
+        {
+            return players;
+        }
+    }
 
     private void Awake()
     {
@@ -52,6 +63,7 @@ public class GameManager : MonoBehaviour
         {
             var obj = players[^indexFromEnd];
             players[^1] = null;
+            OnPlayerDestroyed.Trigger(new PlayerDestroyedArgs(obj.gameObject, obj.PlayerID));
             Destroy(obj.gameObject);
         }
     }
@@ -70,11 +82,11 @@ public class GameManager : MonoBehaviour
     {
         public StateMachine(GameState initialState)
         {
-            currentState = initialState;
+            ActiveState = initialState;
             SetTransitions();
         }
 
-        private GameState currentState;
+        public GameState ActiveState;
         private Dictionary<GameState, GameState[]> stateTransitions = new Dictionary<GameState, GameState[]>();
         
         public enum GameState
@@ -108,8 +120,20 @@ public class GameManager : MonoBehaviour
 
         public void TransitionState(GameState newState)
         {
-            if (stateTransitions[currentState].Contains(newState))
-                currentState = newState;
+            if (stateTransitions[ActiveState].Contains(newState))
+                ActiveState = newState;
         }
+    }
+
+    public class PlayerDestroyedArgs : EventArgs
+    {
+        public PlayerDestroyedArgs(GameObject playerObject, Player.PlayerIdentifier playerID)
+        {
+            PlayerObject = playerObject;
+            PlayerID = playerID;
+        }
+
+        public GameObject PlayerObject { get; }
+        public Player.PlayerIdentifier PlayerID;
     }
 }
