@@ -1,10 +1,13 @@
 using System;
+using Kickstarter.Events;
 using Kickstarter.Identification;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 public class Hybrid : MonoBehaviour, IServiceProvider
 {
+    [SerializeField] private Service OnHybridCreation;
+    
     private IInputReceiver[] inputs;
     private Player player;
     
@@ -12,6 +15,16 @@ public class Hybrid : MonoBehaviour, IServiceProvider
     {
         inputs = GetComponents<IInputReceiver>();
         player = GetComponent<Player>();
+    }
+
+    private void OnEnable()
+    {
+        OnHybridCreation.Event += ImplementService;
+    }
+
+    private void OnDisable()
+    {
+        OnHybridCreation.Event -= ImplementService;
     }
 
     public void ImplementService(EventArgs args)
