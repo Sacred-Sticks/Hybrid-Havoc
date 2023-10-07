@@ -29,24 +29,24 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
 
     private void Start()
     {
-        shootingInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+        SubscribeToInputs();
 
         attackCooldown = 1 / fireRate;
     }
 
     private void OnEnable()
     {
-        shootingInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+        SubscribeToInputs();
     }
 
     private void OnDisable()
     {
-        shootingInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
+        UnsubscribeToInputs();
     }
 
     private void OnDestroy()
     {
-        shootingInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
+        UnsubscribeToInputs();
     }
 
     public void ReceiveInput(float input)
@@ -86,5 +86,15 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
     {
         shootingInput.UnsubscribeToInputAction(ReceiveInput, oldID);
         shootingInput.SubscribeToInputAction(ReceiveInput, newID);
+    }
+
+    public void SubscribeToInputs()
+    {
+        shootingInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+    }
+
+    public void UnsubscribeToInputs()
+    {
+        shootingInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 }

@@ -20,20 +20,30 @@ public class Rotation : MonoBehaviour, IInputReceiver<Vector2>
 
     private void Start()
     {
-        rotationInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+        SubscribeToInputs();
     }
 
     private void OnEnable()
     {
-        rotationInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+        SubscribeToInputs();
     }
 
     private void OnDisable()
     {
-        rotationInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
+        UnsubscribeToInputs();
     }
 
     private void OnDestroy()
+    {
+        UnsubscribeToInputs();
+    }
+
+    public void SubscribeToInputs()
+    {
+        rotationInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+    }
+
+    public void UnsubscribeToInputs()
     {
         rotationInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }

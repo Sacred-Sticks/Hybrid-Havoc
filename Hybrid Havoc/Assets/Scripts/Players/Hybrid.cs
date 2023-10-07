@@ -29,6 +29,10 @@ public class Hybrid : MonoBehaviour, IServiceProvider
         OnHybridCreation.Event -= ImplementService;
         GameManager.instance.SetGameState(GameManager.StateMachine.GameState.HybridInactive);
         OnHybridDeath.Trigger(new HybridDeathArgs());
+        foreach (var inputReceiver in inputs)
+        {
+            inputReceiver.UnsubscribeToInputs();
+        }
     }
 
     public void ImplementService(EventArgs args)
@@ -45,7 +49,6 @@ public class Hybrid : MonoBehaviour, IServiceProvider
         foreach (var inputReceiver in inputs)
         {
             inputReceiver.ResetInputs(args.OldID, args.NewID);
-            Debug.Log($"{inputReceiver}: inputs set to {args.NewID}");
         }
     }
 

@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 
     private void Start()
     {
-        movementInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+        SubscribeToInputs();
     }
 
     private void FixedUpdate()
@@ -34,12 +34,12 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 
     private void OnEnable()
     {
-        movementInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+        SubscribeToInputs();
     }
 
     private void OnDisable()
     {
-        movementInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
+        UnsubscribeToInputs();
     }
 
     public void ReceiveInput(Vector2 input)
@@ -58,5 +58,15 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
     {
         movementInput.UnsubscribeToInputAction(ReceiveInput, oldID);
         movementInput.SubscribeToInputAction(ReceiveInput, newID);
+    }
+
+    public void SubscribeToInputs()
+    {
+        movementInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+    }
+
+    public void UnsubscribeToInputs()
+    {
+        movementInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 }
