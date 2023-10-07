@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
-using System.Xml.Schema;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
-using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 [RequireComponent(typeof(Player))]
-public class Attacking : MonoBehaviour, IInputReceiver<float>, IServiceProvider
+public class Attacking : MonoBehaviour, IInputReceiver<float>
 {
     [SerializeField] private FloatInput shootingInput;
     [Range(0, 1)]
@@ -39,19 +36,16 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>, IServiceProvider
     private void OnEnable()
     {
         shootingInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event += ImplementService;
     }
 
     private void OnDisable()
     {
         shootingInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event -= ImplementService;
     }
 
     private void OnDestroy()
     {
         shootingInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event -= ImplementService;
     }
 
     public void ReceiveInput(float input)
@@ -78,15 +72,9 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>, IServiceProvider
         }
     }
 
-    public void ImplementService(EventArgs args)
+    public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newID)
     {
-        if (args is Hybrid.HybridCreationArgs inputArgs)
-            ResetInputs(inputArgs);
-    }
-
-    public void ResetInputs(Hybrid.HybridCreationArgs args)
-    {
-        shootingInput.UnsubscribeToInputAction(ReceiveInput, args.OldID);
-        shootingInput.SubscribeToInputAction(ReceiveInput, args.NewID);
+        shootingInput.UnsubscribeToInputAction(ReceiveInput, oldID);
+        shootingInput.SubscribeToInputAction(ReceiveInput, newID);
     }
 }

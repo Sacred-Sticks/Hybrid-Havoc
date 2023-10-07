@@ -87,6 +87,8 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
         if (!transformationRoutines.ContainsKey(args.PlayerID))
             transformationRoutines.Add(args.PlayerID, null);
 
+        if (GameManager.instance.GameState.ActiveState == GameManager.StateMachine.GameState.HybridActive)
+            return;
         transformationRoutines[args.PlayerID] = StartCoroutine(TransformationTimer(args.PlayerObject, args.PlayerID));
     }
     
@@ -99,8 +101,6 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
             yield break;
         hybrid.gameObject.SetActive(true);
         playerObject.SetActive(false);
-        if (GameManager.instance.GameState.ActiveState == GameManager.StateMachine.GameState.HybridActive)
-            yield break;
         OnHybridTransformation.Trigger(new Hybrid.HybridCreationArgs(playerObject, hybrid.PlayerID, playerID));
         GameManager.instance.SetGameState(GameManager.StateMachine.GameState.HybridActive);
         hybrid.PlayerID = playerID;

@@ -1,12 +1,10 @@
-using System;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
-using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 [RequireComponent(typeof(Player))]
-public class Rotation : MonoBehaviour, IInputReceiver<Vector2>, IServiceProvider
+public class Rotation : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField] private Vector2Input rotationInput;
     [SerializeField] private Service onHybridTransformation;
@@ -28,19 +26,16 @@ public class Rotation : MonoBehaviour, IInputReceiver<Vector2>, IServiceProvider
     private void OnEnable()
     {
         rotationInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event += ImplementService;
     }
 
     private void OnDisable()
     {
         rotationInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event -= ImplementService;
     }
 
     private void OnDestroy()
     {
         rotationInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event -= ImplementService;
     }
 
     public void ReceiveInput(Vector2 input)
@@ -53,16 +48,10 @@ public class Rotation : MonoBehaviour, IInputReceiver<Vector2>, IServiceProvider
         float angle = Mathf.Atan2(input.x , input.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, angle, 0);
     }
-    
-    public void ImplementService(EventArgs args)
-    {
-        if (args is Hybrid.HybridCreationArgs inputArgs)
-            ResetInputs(inputArgs);
-    }
 
-    public void ResetInputs(Hybrid.HybridCreationArgs args)
+    public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newID)
     {
-        rotationInput.UnsubscribeToInputAction(ReceiveInput, args.OldID);
-        rotationInput.SubscribeToInputAction(ReceiveInput, args.NewID);
+        rotationInput.UnsubscribeToInputAction(ReceiveInput, oldID);
+        rotationInput.SubscribeToInputAction(ReceiveInput, newID);
     }
 }

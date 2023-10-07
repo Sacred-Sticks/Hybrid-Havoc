@@ -1,13 +1,11 @@
-using System;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
-using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Player))]
-public class Movement : MonoBehaviour, IInputReceiver<Vector2>, IServiceProvider
+public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField] private Vector2Input movementInput;
     [SerializeField] private float moveSpeed;
@@ -37,13 +35,11 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>, IServiceProvider
     private void OnEnable()
     {
         movementInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event += ImplementService;
     }
 
     private void OnDisable()
     {
         movementInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
-        onHybridTransformation.Event -= ImplementService;
     }
 
     public void ReceiveInput(Vector2 input)
@@ -58,15 +54,9 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>, IServiceProvider
         body.velocity = velocity;
     }
 
-    public void ImplementService(EventArgs args)
+    public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newID)
     {
-        if (args is Hybrid.HybridCreationArgs inputArgs)
-            ResetInputs(inputArgs);
-    }
-
-    public void ResetInputs(Hybrid.HybridCreationArgs args)
-    {
-        movementInput.UnsubscribeToInputAction(ReceiveInput, args.OldID);
-        movementInput.SubscribeToInputAction(ReceiveInput, args.NewID);
+        movementInput.UnsubscribeToInputAction(ReceiveInput, oldID);
+        movementInput.SubscribeToInputAction(ReceiveInput, newID);
     }
 }

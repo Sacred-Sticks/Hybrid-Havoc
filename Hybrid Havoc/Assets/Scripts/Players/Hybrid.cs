@@ -52,5 +52,10 @@ public class Hybrid : MonoBehaviour, IServiceProvider
     {
         transform.position = args.PlayerObject.transform.position;
         transform.rotation = args.PlayerObject.transform.rotation;
+        
+        foreach (var inputReceiver in inputs)
+        {
+            inputReceiver.ResetInputs(args.OldID, args.NewID);
+        }
     }
 }
