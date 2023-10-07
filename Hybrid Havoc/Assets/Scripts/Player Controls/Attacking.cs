@@ -48,6 +48,12 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>, IServiceProvider
         onHybridTransformation.Event -= ImplementService;
     }
 
+    private void OnDestroy()
+    {
+        shootingInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
+        onHybridTransformation.Event -= ImplementService;
+    }
+
     public void ReceiveInput(float input)
     {
         if (input > deadzone)

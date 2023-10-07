@@ -20,7 +20,7 @@ namespace Kickstarter.Inputs
     public abstract class InputAssetObject<TType> : InputAssetObject where TType : struct
     {
         [SerializeField] protected string[] bindings;
-        
+
         protected readonly Dictionary<InputDevice, Action<TType>> actionMap = new Dictionary<InputDevice, Action<TType>>();
         private InputDevice[] devices;
         protected InputAction inputAction;
@@ -104,9 +104,12 @@ namespace Kickstarter.Inputs
                 Player.PlayerIdentifier.ControllerFour => 4,
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRegister), playerRegister, null),
             };
-            actionMap[devices[playerIndex]] += action;
+            if (playerIndex > devices.Length - 1)
+                return;
+            if (devices[playerIndex] != null)
+                actionMap[devices[playerIndex]] += action;
         }
-        
+
         public void UnsubscribeToInputAction(Action<TType> action, Player.PlayerIdentifier playerRegister)
         {
             if (!actionsRegistered)
@@ -120,7 +123,10 @@ namespace Kickstarter.Inputs
                 Player.PlayerIdentifier.ControllerFour => 4,
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRegister), playerRegister, null),
             };
-            actionMap[devices[playerIndex]] -= action;
+            if (playerIndex > devices.Length - 1)
+                return;
+            if (devices[playerIndex] != null)
+                actionMap[devices[playerIndex]] -= action;
         }
 
         public override void AddDevice(InputDevice device)
@@ -193,5 +199,3 @@ namespace Kickstarter.Inputs
         }
     }
 }
-
-

@@ -37,6 +37,12 @@ public class Rotation : MonoBehaviour, IInputReceiver<Vector2>, IServiceProvider
         onHybridTransformation.Event -= ImplementService;
     }
 
+    private void OnDestroy()
+    {
+        rotationInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
+        onHybridTransformation.Event -= ImplementService;
+    }
+
     public void ReceiveInput(Vector2 input)
     {
         if (input == Vector2.zero)
