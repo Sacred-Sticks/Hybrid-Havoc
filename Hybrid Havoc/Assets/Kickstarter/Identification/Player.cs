@@ -21,6 +21,10 @@ namespace Kickstarter.Identification
             {
                 return playerID;
             }
+            set
+            {
+                playerID = value;
+            }
         }
     }
 }

@@ -27,5 +27,6 @@ public class Bullet : MonoBehaviour
         if (!health)
             return;
         health.DealDamage(damage);
+        Destroy(gameObject);
     }
 }

@@ -4,7 +4,7 @@ using Kickstarter.Inputs;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
-public class Attacking : MonoBehaviour
+public class Attacking : MonoBehaviour, IInputReceiver<float>
 {
     [SerializeField] private FloatInput shootingInput;
     [Range(0, 1)]
@@ -41,7 +41,7 @@ public class Attacking : MonoBehaviour
         shootingInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
-    private void ReceiveInput(float input)
+    public void ReceiveInput(float input)
     {
         if (input > deadzone)
         {
@@ -61,5 +61,11 @@ public class Attacking : MonoBehaviour
             attacker.Attack();
             yield return new WaitForSeconds(attackCooldown);
         }
+    }
+
+    public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newId)
+    {
+        shootingInput.UnsubscribeToInputAction(ReceiveInput, oldID);
+        shootingInput.SubscribeToInputAction(ReceiveInput, newId);
     }
 }

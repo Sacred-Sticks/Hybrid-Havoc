@@ -1,10 +1,9 @@
-using System;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
-public class Rotation : MonoBehaviour
+public class Rotation : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField] private Vector2Input rotationInput;
     [Range(0, 1)]
@@ -32,7 +31,7 @@ public class Rotation : MonoBehaviour
         rotationInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
-    private void ReceiveInput(Vector2 input)
+    public void ReceiveInput(Vector2 input)
     {
         if (input == Vector2.zero)
             return;
@@ -41,5 +40,10 @@ public class Rotation : MonoBehaviour
         
         float angle = Mathf.Atan2(input.x , input.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, angle, 0);
+    }
+
+    public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newId)
+    {
+        throw new System.NotImplementedException();
     }
 }

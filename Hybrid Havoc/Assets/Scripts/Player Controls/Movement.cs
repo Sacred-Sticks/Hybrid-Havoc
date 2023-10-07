@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Player))]
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField] private Vector2Input movementInput;
     [SerializeField] private float moveSpeed;
@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         movementInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 
-    private void ReceiveInput(Vector2 input)
+    public void ReceiveInput(Vector2 input)
     {
         rawInput = input;
     }
@@ -50,5 +50,10 @@ public class Movement : MonoBehaviour
         var desiredDirection = new Vector3(rawInput.x, 0, rawInput.y);
         var velocity = desiredDirection * moveSpeed;
         body.velocity = velocity;
+    }
+
+    public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newId)
+    {
+        throw new NotImplementedException();
     }
 }
