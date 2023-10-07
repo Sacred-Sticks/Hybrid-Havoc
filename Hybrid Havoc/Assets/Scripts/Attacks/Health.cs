@@ -22,13 +22,20 @@ public class Health : MonoBehaviour
         {
             currentHealth = value;
             if (health <= 0)
+            {
                 OnDeath.Trigger(new DeathArgs(gameObject, player.PlayerID));
+            }
         }
     }
 
     private void Awake()
     {
         player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        health = maxHealth;
     }
 
     public void DealDamage(float damage)

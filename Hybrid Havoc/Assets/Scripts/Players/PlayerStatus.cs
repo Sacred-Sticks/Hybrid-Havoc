@@ -11,6 +11,16 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
     [SerializeField] private Service OnRespawn;
     [SerializeField] private float respawnTimer;
 
+    private void OnEnable()
+    {
+        OnDeath.Event += ImplementService;
+    }
+
+    private void OnDisable()
+    {
+        OnDeath.Event -= ImplementService;
+    }
+
     public void ImplementService(EventArgs args)
     {
         if (args is not Health.DeathArgs deathArgs)
