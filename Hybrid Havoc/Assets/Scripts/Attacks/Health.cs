@@ -1,12 +1,15 @@
  using System;
  using Kickstarter.Events;
+ using Kickstarter.Identification;
  using UnityEngine;
-
+ 
+ [RequireComponent(typeof(Player))]
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private Service OnDeath;
 
+    private Player player;
     private float currentHealth;
     
     private float health
@@ -19,8 +22,13 @@ public class Health : MonoBehaviour
         {
             currentHealth = value;
             if (health <= 0)
-                OnDeath.Trigger(new DeathArgs());
+                OnDeath.Trigger(new DeathArgs(gameObject, player.PlayerID));
         }
+    }
+
+    private void Awake()
+    {
+        player = GetComponent<Player>();
     }
 
     public void DealDamage(float damage)
@@ -30,6 +38,13 @@ public class Health : MonoBehaviour
 
     public class DeathArgs : EventArgs
     {
-        
+        public DeathArgs(GameObject playerObject, Player.PlayerIdentifier playerID)
+        {
+            PlayerObject = playerObject;
+            PlayerID = playerID;
+        }
+
+        public GameObject PlayerObject { get; private set; }
+        public Player.PlayerIdentifier PlayerID { get; private set; }
     }
 }
