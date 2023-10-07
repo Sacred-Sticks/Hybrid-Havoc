@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9757701d48367974193359b6398c112d, type: 3}
+  m_Name: Input Manager
+  m_EditorClassIdentifier: 
+  maxPlayerCount: 1
+  inputObjects:
+  - {fileID: 11400000, guid: f386af637ad907042b94775219ef06a8, type: 2}
+  - {fileID: 11400000, guid: 2bd80cf5d991df8488cea8566c8491c7, type: 2}
+  - {fileID: 11400000, guid: 58e250476078fc248931faca417f5744, type: 2}
