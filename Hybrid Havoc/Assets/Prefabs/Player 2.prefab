@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54b61d327355064b85dd1471cd11d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 2
+  playerID: 0
 --- !u!114 &9083368941092513747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {fileID: 11400000, guid: f386af637ad907042b94775219ef06a8, type: 2}
   moveSpeed: 5
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &5602704148314781798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationInput: {fileID: 11400000, guid: 2bd80cf5d991df8488cea8566c8491c7, type: 2}
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
   deadzone: 0.5
 --- !u!114 &8125797755602221390
 MonoBehaviour:
@@ -197,6 +199,7 @@ MonoBehaviour:
   shootingInput: {fileID: 11400000, guid: 58e250476078fc248931faca417f5744, type: 2}
   deadzone: 0.5
   fireRate: 1
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &5800850579833816080
 MonoBehaviour:
   m_ObjectHideFlags: 0

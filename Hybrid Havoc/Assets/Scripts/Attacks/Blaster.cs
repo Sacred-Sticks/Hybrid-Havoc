@@ -7,8 +7,12 @@ public class Blaster : MonoBehaviour, IAttack
     
     public void Attack()
     {
-        var bulletObject = Instantiate(bullet, transform.position, Quaternion.identity);
+        var bulletObject = Instantiate(this.bullet, transform.position + transform.forward, Quaternion.identity);
         bulletObject.TryGetComponent(out Rigidbody body);
+        bulletObject.TryGetComponent(out Bullet bullet);
+        if (!body || !bullet)
+            return;
         body.velocity = transform.forward * bulletSpeed;
+        bullet.Owner = gameObject;
     }
 }

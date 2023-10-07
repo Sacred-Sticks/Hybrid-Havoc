@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using UnityEngine;
@@ -10,7 +12,16 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
     [SerializeField] private Service OnDeath;
     [SerializeField] private Service OnRespawn;
     [SerializeField] private float respawnTimer;
+    [SerializeField] private Player[] players;
 
+    public IEnumerable<Player> Players
+    {
+        get
+        {
+            return players;
+        }
+    }
+    
     private void OnEnable()
     {
         OnDeath.Event += ImplementService;
@@ -64,6 +75,7 @@ public class PlayerStatus : MonoBehaviour, IServiceProvider
 
     private void Respawn(RespawnArgs args)
     {
-        args.PlayerObject.SetActive(true);
+        var player = players.FirstOrDefault(p => p.PlayerID == args.PlayerID);
+        player.gameObject.SetActive(true);
     }
 }

@@ -1,22 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
+[RequireComponent(typeof(PlayerStatus))]
 public class HybridTransformatiom : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private float timeToTransform;
+    [SerializeField] private Player hybrid;
     [Space]
     [SerializeField] private Service OnRespawn;
     [SerializeField] private Service OnDeath;
-    [SerializeField] private HybridType[] hybrids;
+    [Space]
+    [SerializeField] private Service OnHybridTransformation;
 
     private readonly Dictionary<Player.PlayerIdentifier, Coroutine> transformationRoutines = new Dictionary<Player.PlayerIdentifier, Coroutine>();
-
+    private PlayerStatus statusTracker;
+    
     private void OnEnable()
     {
         OnDeath.Event += ImplementService;
@@ -27,6 +30,18 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     {
         OnDeath.Event -= ImplementService;
         OnRespawn.Event -= ImplementService;
+    }
+
+    private void Awake()
+    {
+        statusTracker = GetComponent<PlayerStatus>();
+    }
+
+    private void Start()
+    {
+        var players = statusTracker.Players;
+        foreach (var player in players)
+            StartTransformation(new PlayerStatus.RespawnArgs(player.gameObject, player.PlayerID));
     }
 
     public void ImplementService(EventArgs args)
@@ -64,8 +79,10 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     private IEnumerator TransformationTimer(GameObject playerObject, Player.PlayerIdentifier playerID)
     {
         yield return new WaitForSeconds(timeToTransform);
-        Instantiate(hybrids.FirstOrDefault(h => h.PlayerID == playerID).Prefab);
+        hybrid.gameObject.SetActive(true);
         playerObject.SetActive(false);
+        OnHybridTransformation.Trigger(new Hybrid.HybridCreationArgs(playerObject, hybrid.PlayerID, playerID));
+        hybrid.PlayerID = playerID;
     }
 
     [Serializable]

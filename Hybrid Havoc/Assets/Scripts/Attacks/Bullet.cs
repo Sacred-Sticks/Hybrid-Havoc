@@ -11,6 +11,8 @@ public class Bullet : MonoBehaviour
 
     private bool canCollide;
     
+    public GameObject Owner { private get; set; }
+    
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(waitTime);
@@ -21,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!canCollide)
+        if (collision.gameObject == Owner)
             return;
         collision.gameObject.TryGetComponent(out Health health);
         if (!health)

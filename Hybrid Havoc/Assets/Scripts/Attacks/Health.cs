@@ -2,7 +2,6 @@ using System;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using UnityEngine;
-using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 [RequireComponent(typeof(Player))]
 public class Health : MonoBehaviour
@@ -30,7 +29,6 @@ public class Health : MonoBehaviour
         set
         {
             currentHealth = value;
-            Debug.Log($"New Health: {health}");
             if (currentHealth <= 0)
             {
                 OnDeath.Trigger(new DeathArgs(gameObject, player.PlayerID));
