@@ -845,6 +845,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: initialState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: players.Array.data[0]
       value: 
       objectReference: {fileID: 1290928802}

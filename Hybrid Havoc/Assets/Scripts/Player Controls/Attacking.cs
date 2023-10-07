@@ -18,6 +18,7 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
     private IAttack attacker;
     private Coroutine attack;
 
+    private bool canAttack = true;
     private float attackCooldown;
 
     private void Awake()
@@ -54,13 +55,15 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
             return;
         if (input > deadzone)
         {
-            attack ??= StartCoroutine(AttackTimer());
+            if (canAttack)
+                attack ??= StartCoroutine(AttackTimer());
             return;
         }
         if (attack == null)
             return;
         StopCoroutine(attack);
         attack = null;
+        StartCoroutine(AttackDelay());
     }
 
     private IEnumerator AttackTimer()
@@ -70,6 +73,13 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
             attacker.Attack();
             yield return new WaitForSeconds(attackCooldown);
         }
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
     }
 
     public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newID)
