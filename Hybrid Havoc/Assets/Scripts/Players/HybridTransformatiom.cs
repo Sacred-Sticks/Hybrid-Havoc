@@ -54,7 +54,10 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
         var players = GameManager.instance.Players;
         foreach (var player in players.Where(p => p != null))
         {
-            StartTransformation(new PlayerStatus.RespawnArgs(player.gameObject, player.PlayerID));
+            if (!GameManager.instance.playersActive.ContainsKey(player.PlayerID))
+                continue;
+            if (GameManager.instance.playersActive[player.PlayerID])
+                StartTransformation(new PlayerStatus.RespawnArgs(player.gameObject, player.PlayerID));
         }
     }
 

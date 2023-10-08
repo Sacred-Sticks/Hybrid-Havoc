@@ -10,6 +10,7 @@ using IServiceProvider = Kickstarter.Events.IServiceProvider;
 public class RadialSetter : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private Service OnHealthUpdate;
+    [SerializeField] private Service OnPlayeredDestroyed;
     [SerializeField] private RadialProgressCircle[] radialProgressCircles;
 
     private void Awake()
@@ -23,11 +24,25 @@ public class RadialSetter : MonoBehaviour, IServiceProvider
     private void OnEnable()
     {
         OnHealthUpdate.Event += ImplementService;
+        OnPlayeredDestroyed.Event += ImplementService;
     }
 
     private void OnDisable()
     {
         OnHealthUpdate.Event -= ImplementService;
+        OnPlayeredDestroyed.Event -= ImplementService;
+    }
+
+    private void UpdateRadialProgress(Player.PlayerIdentifier playerID, float progress)
+    {
+        if (radialProgressCircles == null)
+            return;
+        radialProgressCircles.FirstOrDefault(r => r.PlayerID == playerID).RadialProgress.progress = progress;
+    }
+
+    private void DestroyUIElement(Player.PlayerIdentifier playerID)
+    {
+        radialProgressCircles.FirstOrDefault(r => r.PlayerID == playerID).RadialProgress.RemoveFromHierarchy();
     }
 
     public void ImplementService(EventArgs args)
@@ -37,20 +52,16 @@ public class RadialSetter : MonoBehaviour, IServiceProvider
             case RadialProgressArgs radialProgressArgs:
                 UpdateRadialProgress(radialProgressArgs.PlayerID, radialProgressArgs.Progress);
                 break;
+            case GameManager.PlayerDestroyedArgs playerDestroyedArgs:
+                DestroyUIElement(playerDestroyedArgs.PlayerID);
+                break;
         }
-    }
-
-    private void UpdateRadialProgress(Player.PlayerIdentifier playerID, float progress)
-    {
-        if (radialProgressCircles == null)
-            return;
-        radialProgressCircles.FirstOrDefault(r => r.Player == playerID).RadialProgress.progress = progress;
     }
 
     [Serializable]
     private class RadialProgressCircle
     {
-        [SerializeField] private Player.PlayerIdentifier player;
+        [SerializeField] private Player.PlayerIdentifier playerID;
         [SerializeField] private string name;
 
         public string Name
@@ -60,11 +71,11 @@ public class RadialSetter : MonoBehaviour, IServiceProvider
                 return name;
             }
         }
-        public Player.PlayerIdentifier Player
+        public Player.PlayerIdentifier PlayerID
         {
             get
             {
-                return player;
+                return playerID;
             }
         }
         public RadialProgress RadialProgress { get; set; }

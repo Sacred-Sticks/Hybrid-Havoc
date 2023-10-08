@@ -7,7 +7,7 @@ using Kickstarter.Inputs;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private InputManager inputManager;
     [Range(2,4)]
@@ -16,18 +16,23 @@ public class GameManager : MonoBehaviour
     [Space]
     [SerializeField] private StateMachine.GameState initialState;
     [Space]
-    [SerializeField] private Service OnPlayerDestroyed;
+    [SerializeField] private Service onDeath;
+    [SerializeField] private Service onRespawn;
+    [Space]
+    [SerializeField] private Service onPlayerDestroyed;
 
     public static GameManager instance;
+    
 
     public StateMachine GameState { get; private set; }
-    public List<Player> Players
+    public IEnumerable<Player> Players
     {
         get
         {
             return players;
         }
     }
+    public readonly Dictionary<Player.PlayerIdentifier, bool> playersActive = new Dictionary<Player.PlayerIdentifier, bool>();
 
     private void Awake()
     {
@@ -43,6 +48,18 @@ public class GameManager : MonoBehaviour
     {
         RemoveExtraPlayers();
         InitializeStateMachine();
+    }
+
+    private void OnEnable()
+    {
+        onDeath.Event += ImplementService;
+        onRespawn.Event += ImplementService;
+    }
+
+    private void OnDisable()
+    {
+        onDeath.Event -= ImplementService;
+        onRespawn.Event -= ImplementService;
     }
 
     private void RemoveExtraPlayers()
@@ -64,7 +81,7 @@ public class GameManager : MonoBehaviour
         {
             var obj = players[^indexFromEnd];
             players[^1] = null;
-            OnPlayerDestroyed.Trigger(new PlayerDestroyedArgs(obj.gameObject, obj.PlayerID));
+            onPlayerDestroyed.Trigger(new PlayerDestroyedArgs(obj.gameObject, obj.PlayerID));
             Destroy(obj.gameObject);
         }
     }
@@ -77,6 +94,27 @@ public class GameManager : MonoBehaviour
     public void SetGameState(StateMachine.GameState newState)
     {
         GameState.TransitionState(newState);
+    }
+
+    private void TogglePlayerStatus(Player.PlayerIdentifier playerID)
+    {
+        if (!playersActive.ContainsKey(playerID))
+            playersActive.Add(playerID, true);
+
+        playersActive[playerID] = !playersActive[playerID];
+    }
+    
+    public void ImplementService(EventArgs args)
+    {
+        switch (args)
+        {
+            case Health.DeathArgs deathArgs:
+                TogglePlayerStatus(deathArgs.PlayerID);
+                break;
+            case PlayerStatus.RespawnArgs respawnArgs:
+                TogglePlayerStatus(respawnArgs.PlayerID);
+                break;
+        }
     }
     
     public class StateMachine

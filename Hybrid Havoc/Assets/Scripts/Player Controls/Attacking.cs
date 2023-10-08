@@ -44,11 +44,6 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
         UnsubscribeToInputs();
     }
 
-    private void OnDestroy()
-    {
-        UnsubscribeToInputs();
-    }
-
     public void ReceiveInput(float input)
     {
         if (!gameObject.activeInHierarchy)

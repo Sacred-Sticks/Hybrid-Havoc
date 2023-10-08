@@ -154,9 +154,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnHealthUpdate: {fileID: 11400000, guid: b30e125bd0cfff8409424e990fb66bac, type: 2}
+  OnPlayeredDestroyed: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
   radialProgressCircles:
-  - player: 1
+  - playerID: 1
     name: Player_One_Health
+  - playerID: 2
+    name: Player_Two_Health
 --- !u!114 &317520033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,9 +865,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: onDeath
+      value: 
+      objectReference: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: onRespawn
+      value: 
+      objectReference: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
+    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: initialState
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: OnPlayerDeath
+      value: 
+      objectReference: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: OnPlayerRespawn
+      value: 
+      objectReference: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
+    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: onPlayerDestroyed
+      value: 
+      objectReference: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
     - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: players.Array.data[0]
       value: 
