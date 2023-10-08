@@ -4,6 +4,7 @@ using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
+using Kickstarter.Stages;
 using UnityEngine;
 using UnityEngine.UIElements;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
@@ -14,6 +15,10 @@ public class GameManager : MonoBehaviour, IServiceProvider
     [Range(1, 4)]
     [SerializeField] private int numPlayers;
     [SerializeField] private List<Player> players;
+    [Space]
+    [SerializeField] private string mainMenuSceneName;
+    [SerializeField] private string gameplaySceneName;
+    [SerializeField] private string gameoverSceneName;
     [Space]
     [SerializeField] private StateMachine.GameState initialState;
     [Space]
@@ -133,7 +138,7 @@ public class GameManager : MonoBehaviour, IServiceProvider
             SetTransitions();
         }
 
-        public GameState ActiveState;
+        public GameState ActiveState { get; set; }
         private Dictionary<GameState, GameState[]> stateTransitions = new Dictionary<GameState, GameState[]>();
 
         public enum GameState
@@ -167,8 +172,23 @@ public class GameManager : MonoBehaviour, IServiceProvider
 
         public void TransitionState(GameState newState)
         {
-            if (stateTransitions[ActiveState].Contains(newState))
-                ActiveState = newState;
+            if (!stateTransitions[ActiveState].Contains(newState))
+                return;
+
+            ActiveState = newState;
+            switch (ActiveState)
+            {
+                case GameState.MainMenu:
+                    EventManager.Trigger("Scene.Load", new SceneController.SceneChangeEvent(instance.mainMenuSceneName));
+                    break;
+                case GameState.HybridInactive:
+                    break;
+                case GameState.HybridActive:
+                    break;
+                case GameState.GameOver:
+                    EventManager.Trigger("Scene.Load", new SceneController.SceneChangeEvent(instance.gameoverSceneName));
+                    break;
+            }
         }
     }
 

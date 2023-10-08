@@ -11,6 +11,7 @@ using IServiceProvider = Kickstarter.Events.IServiceProvider;
 public class HybridTransformatiom : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private float timeToTransform;
+    [SerializeField] private float timeToWin;
     [SerializeField] private Player hybrid;
     [Space]
     [SerializeField] private Service onRespawn;
@@ -22,6 +23,7 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
 
     private readonly Dictionary<Player.PlayerIdentifier, Coroutine> transformationRoutines = new Dictionary<Player.PlayerIdentifier, Coroutine>();
     private PlayerStatus statusTracker;
+    private Coroutine hybridLifecycle;
 
     private void OnEnable()
     {
@@ -46,6 +48,16 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
 
     private void Start()
     {
+        StartAllTransformations();
+    }
+
+    private void MurderHybrid()
+    {
+        if (hybridLifecycle != null)
+        {
+            StopCoroutine(hybridLifecycle);
+            hybridLifecycle = null;
+        }
         StartAllTransformations();
     }
 
@@ -75,7 +87,7 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
                 CancelTransformation(playerDestroyedArgs);
                 break;
             case Hybrid.HybridDeathArgs:
-                StartAllTransformations();
+                MurderHybrid();
                 break;
         }
     }
@@ -116,5 +128,12 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
         onHybridTransformation.Trigger(new Hybrid.HybridCreationArgs(playerObject, hybrid.PlayerID, playerID));
         GameManager.instance.SetGameState(GameManager.StateMachine.GameState.HybridActive);
         hybrid.PlayerID = playerID;
+        hybridLifecycle = StartCoroutine(WinTimer());
+    }
+
+    private IEnumerator WinTimer()
+    {
+        yield return new WaitForSeconds(timeToWin);
+        GameManager.instance.SetGameState(GameManager.StateMachine.GameState.GameOver);
     }
 }
