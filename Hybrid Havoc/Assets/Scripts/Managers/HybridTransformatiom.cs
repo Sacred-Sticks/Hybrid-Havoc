@@ -7,6 +7,7 @@ using Kickstarter.Identification;
 using Kickstarter.Variables;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PlayerStatus))]
 public class HybridTransformatiom : MonoBehaviour, IServiceProvider
@@ -72,7 +73,7 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
             if (!GameManager.instance.playersActive.ContainsKey(player.PlayerID))
                 continue;
             if (GameManager.instance.playersActive[player.PlayerID])
-                StartTransformation(new PlayerStatus.RespawnArgs(player.gameObject, player.PlayerID));
+                StartTransformation(new PlayerStatus.RespawnArgs(player.gameObject, player.PlayerID), true);
         }
     }
 
@@ -111,17 +112,17 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
         transformationRoutines[args.PlayerID] = null;
     }
 
-    private void StartTransformation(PlayerStatus.RespawnArgs args)
+    private void StartTransformation(PlayerStatus.RespawnArgs args, bool modifyTime = false)
     {
         if (!transformationRoutines.ContainsKey(args.PlayerID))
             transformationRoutines.Add(args.PlayerID, null);
-
-        transformationRoutines[args.PlayerID] = StartCoroutine(TransformationTimer(args.PlayerObject, args.PlayerID));
+        
+        transformationRoutines[args.PlayerID] = StartCoroutine(TransformationTimer(args.PlayerObject, args.PlayerID, modifyTime));
     }
     
-    private IEnumerator TransformationTimer(GameObject playerObject, Player.PlayerIdentifier playerID)
+    private IEnumerator TransformationTimer(GameObject playerObject, Player.PlayerIdentifier playerID, bool modifyTime = false)
     {
-        yield return new WaitForSeconds(timeToTransform);
+        yield return new WaitForSeconds(timeToTransform + (modifyTime ? Random.Range(0.01f, 0.02f) : 0));
         if (GameManager.instance.GameState.ActiveState == GameManager.StateMachine.GameState.HybridActive)
             yield break;
         if (playerObject == null)

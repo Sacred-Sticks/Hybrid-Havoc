@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Search;
 
 public class Bullet : MonoBehaviour
 {
