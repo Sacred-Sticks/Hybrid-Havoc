@@ -69,6 +69,7 @@ namespace Kickstarter.Inputs
 
         private void CreateActionMappings(InputDevice[] inputDevices)
         {
+            actionMap.Clear();
             foreach (var inputDevice in inputDevices)
             {
                 actionMap.Add(inputDevice, null);

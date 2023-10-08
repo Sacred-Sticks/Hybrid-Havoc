@@ -133,6 +133,10 @@ GameObject:
   m_Component:
   - component: {fileID: 171181817}
   - component: {fileID: 171181816}
+  - component: {fileID: 171181820}
+  - component: {fileID: 171181819}
+  - component: {fileID: 171181818}
+  - component: {fileID: 171181821}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -171,6 +175,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &171181818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171181815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667e2f3d4bf45c144950e705d9f952be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &171181819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171181815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171b73a66c90ada4bb9dd036053241c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Main Menu
+--- !u!114 &171181820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171181815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03102e6181119e34fa392889de1ba292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements:
+  - name: b_main_menu
+    onInteract:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 171181819}
+          m_TargetAssemblyTypeName: SceneControls, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &171181821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171181815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edd794fc3fbc8e408a78dd09ec4fae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winner: {fileID: 11400000, guid: 1981bcb51fa21ae4f8e6fa6229ca165a, type: 2}
 --- !u!1 &1176460786
 GameObject:
   m_ObjectHideFlags: 0

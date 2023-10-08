@@ -897,8 +897,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8698781984492712386}
     - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: winner
+      value: 
+      objectReference: {fileID: 11400000, guid: 1981bcb51fa21ae4f8e6fa6229ca165a, type: 2}
+    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: timeToWin
-      value: 5
+      value: 24.14
       objectReference: {fileID: 0}
     - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: timeToTransform

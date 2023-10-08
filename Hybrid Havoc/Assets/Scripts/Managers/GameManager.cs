@@ -6,14 +6,11 @@ using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using Kickstarter.Stages;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 public class GameManager : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private InputManager inputManager;
-    [Range(1, 4)]
     [SerializeField] private List<Player> players;
     [Space]
     [SerializeField] private string mainMenuSceneName;
@@ -46,54 +43,30 @@ public class GameManager : MonoBehaviour, IServiceProvider
 
     private void Awake()
     {
-        if (instance != null)
-            Destroy(gameObject);
         instance = this;
-        DontDestroyOnLoad(this);
-
         inputManager.Initialize(out int playerCount);
         numPlayers = playerCount - 1; // Remove one because we aren't using Keyboard & Mouse
+        
+        InitializeStateMachine();
     }
 
     private void Start()
     {
         RemoveExtraPlayers();
-        InitializeStateMachine();
         foreach (var player in players.Where(p => p != null).ToArray())
-        {
             TogglePlayerStatus(player.PlayerID);
-        }
     }
 
     private void OnEnable()
     {
         onDeath.Event += ImplementService;
         onRespawn.Event += ImplementService;
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         onDeath.Event -= ImplementService;
         onRespawn.Event -= ImplementService;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
-        if (GameState == null)
-            return;
-        switch (GameState.ActiveState)
-        {
-            case StateMachine.GameState.MainMenu:
-                break;
-            case StateMachine.GameState.HybridInactive:
-                Start();
-                break;
-            case StateMachine.GameState.GameOver:
-                FindObjectOfType<UIDocument>().rootVisualElement.Q<Label>(uiWinnerElement).text = $"Winner: {winnerID.ToString()}";
-                break;
-        }
     }
 
     private void RemoveExtraPlayers()
