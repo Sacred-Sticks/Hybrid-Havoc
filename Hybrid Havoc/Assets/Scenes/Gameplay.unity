@@ -582,10 +582,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2850346477782953015, guid: 49f2be8495de87e47bcbe0ab4118bb3b, type: 3}
-      propertyPath: playerID
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3656473626560052864, guid: 49f2be8495de87e47bcbe0ab4118bb3b, type: 3}
       propertyPath: m_Name
       value: Player 3
@@ -873,34 +869,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onDeath
-      value: 
-      objectReference: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onRespawn
-      value: 
-      objectReference: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: numPlayers
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: initialState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: OnPlayerDeath
-      value: 
-      objectReference: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: OnPlayerRespawn
-      value: 
-      objectReference: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onPlayerDestroyed
-      value: 
-      objectReference: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: players.Array.data[0]
       value: 
       objectReference: {fileID: 1290928802}
@@ -920,30 +888,6 @@ PrefabInstance:
       propertyPath: hybrid
       value: 
       objectReference: {fileID: 8698781984492712386}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onDeath
-      value: 
-      objectReference: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onRespawn
-      value: 
-      objectReference: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: OnHybridDeath
-      value: 
-      objectReference: {fileID: 11400000, guid: 6121c2242b017264097a7e609079bc09, type: 2}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onHybridDeath
-      value: 
-      objectReference: {fileID: 11400000, guid: 6121c2242b017264097a7e609079bc09, type: 2}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onPlayerDestroyed
-      value: 
-      objectReference: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: onHybridTransformation
-      value: 
-      objectReference: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
