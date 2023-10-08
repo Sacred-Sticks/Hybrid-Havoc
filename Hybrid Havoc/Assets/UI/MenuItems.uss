@@ -1,0 +1,22 @@
+.title {
+    font-size: 50px;
+    -unity-font-style: bold;
+}
+
+.primary_color {
+    color: rgb(255, 255, 255);
+}
+
+.space_between_rows {
+    flex-grow: 1;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
+    align-items: center;
+    align-self: stretch;
+    flex-direction: row;
+    width: auto;
+}
+
+.width_20 {
+    width: 20%;
+}

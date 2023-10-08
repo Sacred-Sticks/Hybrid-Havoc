@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MenuItems.uss?fileID=7433441132597879392&amp;guid=d5c17e1c1bdf9704b8921c9b69142a4d&amp;type=3#MenuItems" />
+    <ui:VisualElement name="container" style="flex-grow: 1;">
+        <ui:VisualElement name="title_container" style="flex-grow: 0; height: 141px; justify-content: center; align-self: auto; align-items: center;">
+            <ui:Label tabindex="-1" text="Hybrid Havoc!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="title primary_color" />
+        </ui:VisualElement>
+        <ui:VisualElement name="buttons_container" style="flex-grow: 1;">
+            <ui:VisualElement name="upper_buttons" class="space_between_rows">
+                <ui:Button text="One Player" parse-escape-sequences="true" display-tooltip-when-elided="true" name="b_single_player" class="width_20" />
+                <ui:Button text="Two Players" parse-escape-sequences="true" display-tooltip-when-elided="true" name="b_two_player" class="width_20" />
+            </ui:VisualElement>
+            <ui:VisualElement name="left_buttons" class="space_between_rows">
+                <ui:Button text="Three Players" parse-escape-sequences="true" display-tooltip-when-elided="true" name="b_three_player" class="width_20" />
+                <ui:Button text="Four Players" parse-escape-sequences="true" display-tooltip-when-elided="true" name="b_four_player" class="width_20" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

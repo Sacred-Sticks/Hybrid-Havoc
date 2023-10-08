@@ -1,10 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/RadialProgress.uss?fileID=7433441132597879392&amp;guid=6f8bdff5c7bb3d24e9899ea9ea6aab2b&amp;type=3#RadialProgress" />
-    <ui:VisualElement name="Bottom_Element" style="flex-grow: 1; justify-content: space-between; flex-direction: row; align-items: flex-start; align-self: stretch; flex-wrap: wrap-reverse;">
+    <Style src="project://database/Assets/UI/MenuItems.uss?fileID=7433441132597879392&amp;guid=d5c17e1c1bdf9704b8921c9b69142a4d&amp;type=3#MenuItems" />
+    <ui:VisualElement name="top_radials" style="flex-grow: 1; justify-content: space-between; flex-direction: row; align-items: flex-start; align-self: stretch; flex-wrap: wrap-reverse;">
         <MyUILibrary.RadialProgress name="Player_Three_Health" style="align-items: center; justify-content: center; align-self: flex-end;" />
         <MyUILibrary.RadialProgress name="Player_Four_Health" style="-unity-background-image-tint-color: rgb(0, 255, 252); align-self: flex-end; align-items: center; justify-content: center;" />
     </ui:VisualElement>
-    <ui:VisualElement name="Bottom_Element" style="flex-grow: 1; justify-content: space-between; align-items: stretch; align-self: auto; flex-direction: row; position: relative; flex-wrap: wrap-reverse;">
+    <ui:VisualElement name="bottom_radials" style="flex-grow: 1; justify-content: space-between; align-items: stretch; align-self: auto; flex-direction: row; position: relative; flex-wrap: wrap-reverse;">
         <MyUILibrary.RadialProgress name="Player_One_Health" style="align-items: center; justify-content: center; align-self: flex-start; bottom: auto;" />
         <MyUILibrary.RadialProgress name="Player_Two_Health" style="-unity-background-image-tint-color: rgb(0, 255, 252); align-self: auto; align-items: center; justify-content: center; bottom: auto;" />
     </ui:VisualElement>
