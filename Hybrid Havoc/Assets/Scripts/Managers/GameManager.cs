@@ -10,7 +10,7 @@ using IServiceProvider = Kickstarter.Events.IServiceProvider;
 public class GameManager : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private InputManager inputManager;
-    [Range(2,4)]
+    [Range(1,4)]
     [SerializeField] private int numPlayers;
     [SerializeField] private List<Player> players;
     [Space]
@@ -64,9 +64,13 @@ public class GameManager : MonoBehaviour, IServiceProvider
 
     private void RemoveExtraPlayers()
     {
-
         switch (numPlayers)
         {
+            case 1:
+                RemovePlayer(1);
+                RemovePlayer(2);
+                RemovePlayer(3);
+                break;
             case 2:
                 RemovePlayer(1);
                 RemovePlayer(2);

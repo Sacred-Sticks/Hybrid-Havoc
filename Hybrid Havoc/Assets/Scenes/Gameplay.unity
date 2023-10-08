@@ -160,6 +160,10 @@ MonoBehaviour:
     name: Player_One_Health
   - playerID: 2
     name: Player_Two_Health
+  - playerID: 3
+    name: Player_Three_Health
+  - playerID: 4
+    name: Player_Four_Health
 --- !u!114 &317520033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +582,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2850346477782953015, guid: 49f2be8495de87e47bcbe0ab4118bb3b, type: 3}
+      propertyPath: playerID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3656473626560052864, guid: 49f2be8495de87e47bcbe0ab4118bb3b, type: 3}
       propertyPath: m_Name
       value: Player 3
@@ -872,6 +880,10 @@ PrefabInstance:
       propertyPath: onRespawn
       value: 
       objectReference: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
+    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
+      propertyPath: numPlayers
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: initialState
       value: 1
