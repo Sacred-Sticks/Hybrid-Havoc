@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
+using Kickstarter.Variables;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
@@ -20,6 +21,8 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     [SerializeField] private Service onHybridDeath;
     [Space]
     [SerializeField] private Service onHybridTransformation;
+    [Space]
+    [SerializeField] private StringVariable winner;
 
     private readonly Dictionary<Player.PlayerIdentifier, Coroutine> transformationRoutines = new Dictionary<Player.PlayerIdentifier, Coroutine>();
     private PlayerStatus statusTracker;
@@ -135,6 +138,7 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     {
         yield return new WaitForSeconds(timeToWin);
         GameManager.instance.winnerID = hybrid.PlayerID;
+        winner.Value = hybrid.PlayerID.ToString();
         GameManager.instance.SetGameState(GameManager.StateMachine.GameState.GameOver);
     }
 }

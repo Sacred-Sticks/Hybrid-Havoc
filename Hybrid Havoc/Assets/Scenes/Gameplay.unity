@@ -869,14 +869,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: initialState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: uiWinnerElement
-      value: t_winner
-      objectReference: {fileID: 0}
-    - target: {fileID: 4371319485007690738, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
       propertyPath: players.Array.data[0]
       value: 
       objectReference: {fileID: 1290928802}
@@ -896,18 +888,6 @@ PrefabInstance:
       propertyPath: hybrid
       value: 
       objectReference: {fileID: 8698781984492712386}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: winner
-      value: 
-      objectReference: {fileID: 11400000, guid: 1981bcb51fa21ae4f8e6fa6229ca165a, type: 2}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: timeToWin
-      value: 24.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 5255775134727524004, guid: 851a6244f25ba8c489dff4c02fdbbb79, type: 3}
-      propertyPath: timeToTransform
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

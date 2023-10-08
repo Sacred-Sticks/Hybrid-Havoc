@@ -56,7 +56,8 @@ MonoBehaviour:
   mainMenuSceneName: Main Menu
   gameplaySceneName: Gameplay
   gameoverSceneName: Game End
-  initialState: 0
+  uiWinnerElement: t_winner
+  initialState: 1
   onDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
   onRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
   onPlayerDestroyed: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
@@ -87,14 +88,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5329676bbcb7846a0b8bc4d71c6013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToTransform: 10
-  timeToWin: 30
+  timeToTransform: 5
+  timeToWin: 24.14
   hybrid: {fileID: 0}
   onRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
   onDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
   onPlayerDestroyed: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}
   onHybridDeath: {fileID: 11400000, guid: 6121c2242b017264097a7e609079bc09, type: 2}
   onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
+  winner: {fileID: 11400000, guid: 1981bcb51fa21ae4f8e6fa6229ca165a, type: 2}
 --- !u!114 &3520579075251779957
 MonoBehaviour:
   m_ObjectHideFlags: 0
