@@ -20,7 +20,8 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
 
     private bool canAttack = true;
     private float attackCooldown;
-
+    private float rawInput;
+    
     private void Awake()
     {
         player = GetComponent<Player>();
@@ -46,19 +47,29 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
 
     public void ReceiveInput(float input)
     {
+        rawInput = input;
         if (!gameObject.activeInHierarchy)
             return;
         if (input > deadzone)
-        {
-            if (canAttack)
-                attack ??= StartCoroutine(AttackTimer());
-            return;
-        }
+            UseWeapon();
+        else
+            CancelWeapon();
+    }
+
+    private void UseWeapon()
+    {
+        if (canAttack)
+            attack ??= StartCoroutine(AttackTimer());
+    }
+
+    private void CancelWeapon()
+    {
         if (attack == null)
             return;
         StopCoroutine(attack);
         attack = null;
-        StartCoroutine(AttackDelay());
+        if (canAttack)
+            StartCoroutine(AttackDelay());
     }
 
     private IEnumerator AttackTimer()
@@ -75,6 +86,7 @@ public class Attacking : MonoBehaviour, IInputReceiver<float>
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+        ReceiveInput(rawInput);
     }
 
     public void ResetInputs(Player.PlayerIdentifier oldID, Player.PlayerIdentifier newID)

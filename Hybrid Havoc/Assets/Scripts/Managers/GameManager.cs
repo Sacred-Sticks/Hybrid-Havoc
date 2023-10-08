@@ -5,12 +5,13 @@ using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
+using UnityEngine.UIElements;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 
 public class GameManager : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private InputManager inputManager;
-    [Range(1,4)]
+    [Range(1, 4)]
     [SerializeField] private int numPlayers;
     [SerializeField] private List<Player> players;
     [Space]
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour, IServiceProvider
     [SerializeField] private Service onPlayerDestroyed;
 
     public static GameManager instance;
-    
+
 
     public StateMachine GameState { get; private set; }
     public IEnumerable<Player> Players
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour, IServiceProvider
     {
         RemoveExtraPlayers();
         InitializeStateMachine();
+        foreach (var player in players.Where(p => p != null).ToArray())
+        {
+            TogglePlayerStatus(player.PlayerID);
+        }
     }
 
     private void OnEnable()
@@ -103,11 +108,10 @@ public class GameManager : MonoBehaviour, IServiceProvider
     private void TogglePlayerStatus(Player.PlayerIdentifier playerID)
     {
         if (!playersActive.ContainsKey(playerID))
-            playersActive.Add(playerID, true);
-
+            playersActive.Add(playerID, false);
         playersActive[playerID] = !playersActive[playerID];
     }
-    
+
     public void ImplementService(EventArgs args)
     {
         switch (args)
@@ -120,7 +124,7 @@ public class GameManager : MonoBehaviour, IServiceProvider
                 break;
         }
     }
-    
+
     public class StateMachine
     {
         public StateMachine(GameState initialState)
@@ -131,7 +135,7 @@ public class GameManager : MonoBehaviour, IServiceProvider
 
         public GameState ActiveState;
         private Dictionary<GameState, GameState[]> stateTransitions = new Dictionary<GameState, GameState[]>();
-        
+
         public enum GameState
         {
             MainMenu,
