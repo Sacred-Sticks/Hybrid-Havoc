@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {fileID: 11400000, guid: f386af637ad907042b94775219ef06a8, type: 2}
   moveSpeed: 5
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &5602704148314781798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationInput: {fileID: 11400000, guid: 2bd80cf5d991df8488cea8566c8491c7, type: 2}
   deadzone: 0.5
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &8125797755602221390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +198,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingInput: {fileID: 11400000, guid: 58e250476078fc248931faca417f5744, type: 2}
   deadzone: 0.5
-  fireRate: 1
+  fireRate: 3
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &5800850579833816080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,3 +228,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+  OnHealthUpdate: {fileID: 11400000, guid: b30e125bd0cfff8409424e990fb66bac, type: 2}

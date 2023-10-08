@@ -147,5 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 10
-  waitTime: 0.025
-  damage: 50
+  damage: 5

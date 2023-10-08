@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private Service OnDeath;
+    [SerializeField] private Service OnHealthUpdate;
 
     private Player player;
     private float currentHealth;
@@ -29,6 +30,7 @@ public class Health : MonoBehaviour
         set
         {
             currentHealth = value;
+            OnHealthUpdate.Trigger(new RadialSetter.RadialProgressArgs(player.PlayerID, currentHealth));
             if (currentHealth <= 0)
             {
                 OnDeath.Trigger(new DeathArgs(gameObject, player.PlayerID));

@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationInput: {fileID: 11400000, guid: 2bd80cf5d991df8488cea8566c8491c7, type: 2}
-  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
   deadzone: 0.5
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &3590074065984141438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+  OnHealthUpdate: {fileID: 11400000, guid: b30e125bd0cfff8409424e990fb66bac, type: 2}
 --- !u!114 &249611440823225219
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,9 +7,10 @@ using UnityEngine;
 public class Rotation : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField] private Vector2Input rotationInput;
-    [SerializeField] private Service onHybridTransformation;
     [Range(0, 1)]
     [SerializeField] private float deadzone;
+    [Space]
+    [SerializeField] private Service onHybridTransformation;
     
     private Player player;
 

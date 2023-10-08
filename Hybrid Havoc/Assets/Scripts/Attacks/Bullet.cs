@@ -21,9 +21,8 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject == Owner)
             return;
         collision.gameObject.TryGetComponent(out Health health);
-        if (!health)
-            return;
-        health.DealDamage(damage);
+        if (health) 
+            health.DealDamage(damage);
         Destroy(gameObject);
     }
 }

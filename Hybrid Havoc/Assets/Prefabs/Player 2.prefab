@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54b61d327355064b85dd1471cd11d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
+  playerID: 2
 --- !u!114 &9083368941092513747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationInput: {fileID: 11400000, guid: 2bd80cf5d991df8488cea8566c8491c7, type: 2}
-  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
   deadzone: 0.5
+  onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &8125797755602221390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingInput: {fileID: 11400000, guid: 58e250476078fc248931faca417f5744, type: 2}
   deadzone: 0.5
-  fireRate: 1
+  fireRate: 3
   onHybridTransformation: {fileID: 11400000, guid: 80491561f2ddcc849b3fccf87237276c, type: 2}
 --- !u!114 &5800850579833816080
 MonoBehaviour:
@@ -228,3 +228,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   OnDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
+  OnHealthUpdate: {fileID: 11400000, guid: b30e125bd0cfff8409424e990fb66bac, type: 2}

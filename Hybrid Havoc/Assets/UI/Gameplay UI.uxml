@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/RadialProgress.uss?fileID=7433441132597879392&amp;guid=6f8bdff5c7bb3d24e9899ea9ea6aab2b&amp;type=3#RadialProgress" />
+    <MyUILibrary.RadialProgress name="Player_One_Health" />
+    <MyUILibrary.RadialProgress name="Player_Two_Health" style="-unity-background-image-tint-color: rgb(0, 255, 252);" />
+</ui:UXML>

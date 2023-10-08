@@ -98,8 +98,6 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
         if (!transformationRoutines.ContainsKey(args.PlayerID))
             transformationRoutines.Add(args.PlayerID, null);
 
-        if (GameManager.instance.GameState.ActiveState == GameManager.StateMachine.GameState.HybridActive)
-            return;
         transformationRoutines[args.PlayerID] = StartCoroutine(TransformationTimer(args.PlayerObject, args.PlayerID));
     }
     
