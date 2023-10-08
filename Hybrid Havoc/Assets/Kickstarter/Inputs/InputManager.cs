@@ -12,15 +12,17 @@ namespace Kickstarter.Inputs
         [Space(20)]
         [SerializeField] private InputAssetObject[] inputObjects;
 
-        public void Initialize()
+        public void Initialize(out int numPlayers)
         {
             InputSystem.onDeviceChange += OnInputDevicesChange;
-            var gamepads = Gamepad.all.Take(maxPlayerCount).ToArray();
+            // Remove DualShock to prevent double registering it
+            var gamepads = Gamepad.all.Where(g => !g.name.Contains("DualShock")).Take(maxPlayerCount).ToArray(); 
             foreach (var inputObject in inputObjects)
             {
                 inputObject.Initialize(gamepads);
             }
             EnableAll();
+            numPlayers = gamepads.Length + 1;
         }
 
         private void OnInputDevicesChange(InputDevice device, InputDeviceChange changeType)

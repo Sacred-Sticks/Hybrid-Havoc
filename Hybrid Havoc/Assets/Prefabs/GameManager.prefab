@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 11400000, guid: 2f7121e486521a946b6769d6248dd56c, type: 2}
-  numPlayers: 2
   players:
   - {fileID: 0}
   - {fileID: 0}
@@ -57,7 +56,7 @@ MonoBehaviour:
   mainMenuSceneName: Main Menu
   gameplaySceneName: Gameplay
   gameoverSceneName: Game End
-  initialState: 1
+  initialState: 0
   onDeath: {fileID: 11400000, guid: 74a626850b35d334ebe2b5994bff47d9, type: 2}
   onRespawn: {fileID: 11400000, guid: a520c59cd0e730e4bb56b3275c890084, type: 2}
   onPlayerDestroyed: {fileID: 11400000, guid: b90b27229cea5214a80915c2f99a9578, type: 2}

@@ -134,6 +134,7 @@ public class HybridTransformatiom : MonoBehaviour, IServiceProvider
     private IEnumerator WinTimer()
     {
         yield return new WaitForSeconds(timeToWin);
+        GameManager.instance.winnerID = hybrid.PlayerID;
         GameManager.instance.SetGameState(GameManager.StateMachine.GameState.GameOver);
     }
 }
