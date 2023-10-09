@@ -11,4 +11,9 @@ public class SceneControls : MonoBehaviour
     {
         EventManager.Trigger("Scene.Load", new SceneController.SceneChangeEvent(sceneName));
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
